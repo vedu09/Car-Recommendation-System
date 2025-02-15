@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Recommendation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #f0f2f5, #e6effd);
+            margin: 0;
+            padding: 40px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Title Styling */
+        .title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    padding: 15px 30px;
+    border-radius: 12px;
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Light gradient */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    width: fit-content;
+    margin: 0 auto 30px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Smooth animation for title */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+        /* Main Container */
+        .container {
+            display: flex;
+            gap: 30px;
+            max-width: 1000px;
+            width: 100%;
+            flex-grow: 1;
+        }
+
+        /* Box Styling */
+        .form-container, .table-container {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+            border: 1px solid #ddd;
+        }
+
+        h2, h3 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        select, input {
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 14px;
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #0056b3, #004494);
+        }
+
+        /* Table Styling */
+        .table-container {
+            flex: 1.5;
+            display: none;
+            position: relative;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        th {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Close button */
+        .close-btn {
+            display: block;
+            margin: 15px auto 0;
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 8px 15px;
+            border-radius: 6px;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: darkred;
+        }
+
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slider-value {
+            font-size: 14px;
+            margin-top: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .footer {
+            background: linear-gradient(to right, #0056b3, #003974);
+        color: white;
+        text-align: center;
+        margin-top: 30px;
+        /* padding: 15px 0; */
+        font-size: 14px;
+        font-weight: 600;
+        width: 100%;
+    }
+    </style>
+
+
+<!-- JAVASCRIPT CODE -->
+<script>
+    function updateSliderValue(id, value) {
+        document.getElementById(id).innerText = value;
+    }
+
+    function clearResults() {
+        document.getElementById("table").style.display = "none";
+    }
+</script>
+
+</head>
+<body>
+
+    <div class="title"> Car Recommendation System</div>
+
+    <div class="container">
+        <div class="form-container">
+            <h2>Find Your Perfect Car</h2>
+            <form method="POST">
+                <label>Car Brand:</label>
+                <select name="car_brand" required>
+                    <option value="" disabled selected>Select Brand</option>
+                    <option value="0">BMW</option>
+                    <option value="1">FORD</option>
+                    <option value="2">HONDA</option>
+                    <option value="3">HYUNDAI</option>
+                    <option value="4">KIA</option>
+                    <option value="5">MG</option>
+                    <option value="6">MAHINDRA</option>
+                    <option value="7">MARUTI SUZUKI</option>
+                    <option value="8">MERCEDEZ BENZ</option>
+                    <option value="9">NISSAN</option>
+                    <option value="10">RENAULT</option>
+                    <option value="11">SKODA</option>
+                    <option value="12">TATA</option>
+                    <option value="13">TOYOTA</option>
+                </select>
+                
+                <label>Fuel Type:</label>
+                <select name="fuel_type" required>
+                    <option value="" disabled selected>Select Fuel Type</option>
+                    <option value="0">CNG</option>
+                    <option value="1">DIESEL</option>
+                    <option value="2">ELECTRIC</option>
+                    <option value="3">HYBRID</option>
+                    <option value="4">PETROL</option>
+                </select>
+
+                <label>Transmission:</label>
+                <select name="transmission" required>
+                    <option value="" disabled selected>Select Transmission</option>
+                    <option value="0">AUTO</option>
+                    <option value="1">MANUAL</option>
+                </select>
+
+                <label>Min Price:</label>
+                <div class="slider-container">
+                    <input type="range" name="min_price" min="100000" max="15000000" step="100000" value="500000" oninput="updateSliderValue('min-price-value', this.value)">
+                    <span id="min-price-value" class="slider-value">500000</span>
+                </div>
+
+                <label>Max Price:</label>
+                <div class="slider-container">
+                    <input type="range" name="max_price" min="100000" max="15000000" step="100000" value="2000000" oninput="updateSliderValue('max-price-value', this.value)">
+                    <span id="max-price-value" class="slider-value">2000000</span>
+                </div>
+                
+                <button type="submit">Find Cars</button>
+            </form>
+        </div>
+
+
+<!--========================== !! !! !! !! ======================================================= -->
+<!--========================== !! !! !! !! ======================================================= -->
+
+<!-- DISPLAY SECTION -->
+        {% if results is not none %}
+<div id="table-container" class="table-container" style="display: block;">
+    <h3>Recommended Cars:</h3>
+    
+    {% if results %}
+    <table id="table">
+        <tr>
+            <th>Car Brand</th>
+            <th>Car Model</th>
+            <th>Fuel Type</th>
+            <th>Transmission</th>
+            <th>Price</th>
+        </tr>
+        {% for car in results %}
+        <tr>
+            <td>{{ car['CAR_BRAND'] }}</td>
+            <td>{{ car['CAR_MODEL'] }}</td>
+            <td>{{ car['FUEL_TYPE'] }}</td>
+            <td>{{ car['TRANSMISSION'] }}</td>
+            <td>{{ car['EX_SHOWROOM_PRICE'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p style="text-align: center; color: red; font-size: 16px; font-weight: bold;">No matching cars found.</p>
+    {% endif %}
+    
+    <button class="close-btn" onclick="document.getElementById('table').style.display='none'">Clear Results</button>
+</div>
+{% endif %}
+    </div>
+
+
+
+<!--========================== !! !! !! !! ======================================================= -->
+<!--========================== !! !! !! !! ======================================================= -->
+
+<!-- Footer -->
+<footer class="footer">
+    <p>&copy; 2025 Car Recommendation System. All rights reserved.</p>
+</footer>
+
+
+</body>
+</html>
